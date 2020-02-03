@@ -1,7 +1,6 @@
 #### 安装扩展
 	pdo_mysql
 	zip
-	zlib
 
 
 #### 文件目录
