@@ -1,5 +1,6 @@
 #### 安装扩展
 	pdo_mysql
+	gd
 	zip
 
 
