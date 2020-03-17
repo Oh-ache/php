@@ -6,6 +6,7 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/re
 	docker-php-ext-install pdo_mysql zip gd && \
 	cd / && wget http://pecl.php.net/get/xdebug-2.7.0.tgz && \
 	tar -zxvf xdebug-2.7.0.tgz && cd xdebug-2.7.0 && \
+	cd / && rm -rf xdebug* && \
 	phpize && ./configure && make && make install 
 
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
