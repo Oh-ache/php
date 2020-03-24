@@ -12,7 +12,10 @@ RUN apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev make g++ --
 	cd / && wget http://pecl.php.net/get/swoole-4.4.16.tgz && \
 	tar -zxf swoole-4.4.16.tgz && cd swoole-4.4.16 && \
 	phpize && ./configure && make && make install && \
-	cd / && rm -rf xdebug* redis* swoole*
+	cd // && wget http://pecl.php.net/get/yaconf-1.1.0.tgz && \
+	tar -zxf yaconf-1.1.0.tgz && cd yaconf-1.1.0 && \
+	phpize && ./configure && make && make install && \
+	cd / && rm -rf xdebug* redis* swoole* yaconf*
 
 ADD extension.tar /usr/local/etc/php/conf.d/
 
