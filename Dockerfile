@@ -1,4 +1,4 @@
-FROM php:7.3.6-fpm-alpine3.9
+FROM php:7.4.5-fpm-alpine
 
 RUN apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev make g++ --no-cache && \
 	composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ && \
