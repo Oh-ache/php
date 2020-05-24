@@ -1,10 +1,10 @@
 FROM php:7.4.5-fpm-alpine
 
 RUN	sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories && \
-	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-turbo-dev freetype-dev make g++ rabbitmq-c-dev --no-cache && \
+	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-turbo-dev freetype-dev make g++ rabbitmq-c-dev libsodium-dev libmcrypt-dev gmp-dev --no-cache && \
 	composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ && \
 	docker-php-ext-configure gd --with-jpeg --with-freetype && \
-	docker-php-ext-install pdo_mysql zip gd sockets && \
+	docker-php-ext-install pdo_mysql zip gd sockets gmp && \
 	cd / && wget http://pecl.php.net/get/xdebug-2.9.5.tgz && \
 	tar -zxvf xdebug-2.9.5.tgz && cd xdebug-2.9.5 && \
 	phpize && ./configure && make && make install && \
@@ -20,7 +20,13 @@ RUN	sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/re
 	cd / && wget http://pecl.php.net/get/amqp-1.10.2.tgz && \
 	tar -zxvf amqp-1.10.2.tgz && cd amqp-1.10.2 && \
 	phpize && ./configure && make && make install && \
-	cd / && rm -rf xdebug* redis* swoole* yaconf* amqp*
+	cd / && wget http://pecl.php.net/get/libsodium-2.0.22.tgz && \
+	tar -zxvf libsodium-2.0.22.taz && cd libsodium-2.0.22 && \
+	phpize && ./configure && make && make install && \
+	cd / && wget http://pecl.php.net/get/mcrypt-1.0.3.tgz && \
+	tar -zxvf mcrypt-1.0.3.tgz && cd mcrypt-1.0.3 && \
+	phpize && ./configure && make && make install && \
+	cd / && rm -rf xdebug* redis* swoole* yaconf* amqp* libsodium*
 
 ADD extension.tar /usr/local/etc/php/conf.d/
 
