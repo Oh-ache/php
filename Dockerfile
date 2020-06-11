@@ -1,8 +1,10 @@
 FROM php:7.3.18-fpm-alpine
 
-RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-turbo-dev freetype-dev make g++ rabbitmq-c-dev libsodium-dev libmcrypt-dev gmp-dev --no-cache && \
+RUN	sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories && \
+	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-turbo-dev freetype-dev make g++ rabbitmq-c-dev libsodium-dev libmcrypt-dev gmp-dev --no-cache && \
 	composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ && \
-	docker-php-ext-configure gd --with-jpeg --with-freetype && \
+	# docker-php-ext-configure gd --with-jpeg --with-freetype && \
+	docker-php-ext-configure gd && \
 	docker-php-ext-install pdo_mysql mysqli zip gd sockets gmp pcntl bcmath && \
 	cd / && wget http://pecl.php.net/get/xdebug-2.9.5.tgz && \
 	tar -zxvf xdebug-2.9.5.tgz && cd xdebug-2.9.5 && \
@@ -28,7 +30,7 @@ RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-tur
 	cd / && wget http://pecl.php.net/get/mongodb-1.7.4.tgz && \
 	tar -zxvf mongodb-1.7.4.tgz && cd mongodb-1.7.4 && \
 	phpize && ./configure && make && make install && \
-	cd / && rm -rf xdebug* redis* swoole* yaconf* amqp* libsodium* mongodb*
+	cd / && rm -rf xdebug* redis* swoole* yaconf* amqp* libsodium* mongodb* 
 
 ADD extension.tar /usr/local/etc/php/conf.d/
 
