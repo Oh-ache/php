@@ -25,7 +25,10 @@ RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-tur
 	cd / && wget http://pecl.php.net/get/mcrypt-1.0.3.tgz && \
 	tar -zxvf mcrypt-1.0.3.tgz && cd mcrypt-1.0.3 && \
 	phpize && ./configure && make && make install && \
-	cd / && rm -rf xdebug* redis* swoole* yaconf* amqp* libsodium*
+	cd / && wget http://pecl.php.net/get/mongodb-1.7.4.tgz && \
+	tar -zxvf mongodb-1.7.4.tgz && cd mongodb-1.7.4 && \
+	phpize && ./configure && make && make install && \
+	cd / && rm -rf xdebug* redis* swoole* yaconf* amqp* libsodium* mongodb*
 
 ADD extension.tar /usr/local/etc/php/conf.d/
 
