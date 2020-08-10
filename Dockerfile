@@ -1,10 +1,11 @@
 FROM php:7.4.5-fpm-alpine
 
-RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-turbo-dev freetype-dev make g++ rabbitmq-c-dev libsodium-dev libmcrypt-dev gmp-dev --no-cache && \
+RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-turbo-dev freetype-dev make g++
+rabbitmq-c-dev libsodium-dev libmcrypt-dev unzip gmp-dev --no-cache && \
 	composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ && \
 	docker-php-ext-configure gd --with-jpeg --with-freetype && \
 	docker-php-ext-install pdo_mysql mysqli zip gd sockets gmp pcntl bcmath
-RUN	cd / && wget https://github.com/swoole/sdebug/archive/sdebug_2_9.zip && \A
+RUN	cd / && wget https://github.com/swoole/sdebug/archive/sdebug_2_9.zip && \
 	unzip sdebug_2_9.zip && cd sdebug-sdebug_2_9 && \
 	phpize && ./configure --enable-xdebug && make && make install && \
 	cd / && wget http://pecl.php.net/get/redis-5.1.0.tgz && \
