@@ -23,7 +23,7 @@ RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-tur
 	tar -zxvf mongodb-1.7.4.tgz && cd mongodb-1.7.4 && \
 	phpize && ./configure && make && make install && \
 	cd / && wget http://pecl.php.net/get/memcached-3.1.5.tgz && \
-	tar -zxvf memcached-3.1.5.tgz && cd cd memcached-3.1.5 && \
+	tar -zxvf memcached-3.1.5.tgz && cd memcached-3.1.5 && \
 	phpize && ./configure && make && make install && \
 	cd / && rm -rf redis* yaconf* amqp* libsodium* mongodb* && \
 	sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
