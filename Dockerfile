@@ -16,6 +16,9 @@ RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-tur
 	cd / && wget http://pecl.php.net/get/libsodium-2.0.22.tgz && \
 	tar -zxvf libsodium-2.0.22.tgz && cd libsodium-2.0.22 && \
 	phpize && ./configure && make && make install && \
+	cd / && wget http://pecl.php.net/get/swoole-4.4.16.tgz && \
+	tar -zxf swoole-4.4.16.tgz && cd swoole-4.4.16 && \
+	phpize && ./configure --enable-openssl && make && make install && \
 	cd / && wget http://pecl.php.net/get/mcrypt-1.0.3.tgz && \
 	tar -zxvf mcrypt-1.0.3.tgz && cd mcrypt-1.0.3 && \
 	phpize && ./configure && make && make install && \
