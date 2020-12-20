@@ -1,8 +1,8 @@
 FROM php:7.1.33-fpm-alpine3.10
 
-RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-turbo-dev freetype-dev make g++ rabbitmq-c-dev libsodium-dev libmcrypt-dev gmp-dev libmemcached-dev --no-cache && \
+RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-turbo-dev jpeg-dev freetype-dev make g++ rabbitmq-c-dev libsodium-dev libmcrypt-dev gmp-dev libmemcached-dev --no-cache && \
 	composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ && \
-	docker-php-ext-configure gd --with-jpeg --with-freetype && \
+	docker-php-ext-configure gd --with-jpeg-dir=/usr/lib --with-freetype-dir=/usr/include/freetype2 && \
 	docker-php-ext-install pdo_mysql mysqli zip gd sockets gmp pcntl bcmath && \
 	cd / && wget http://pecl.php.net/get/redis-5.1.0.tgz && \
 	tar -zxf redis-5.1.0.tgz && cd redis-5.1.0 && \
