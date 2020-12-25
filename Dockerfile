@@ -29,6 +29,10 @@ RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-tur
 	tar -zxvf memcached-3.1.5.tgz && cd memcached-3.1.5 && \
 	phpize && ./configure && make && make install && \
 	cd / && rm -rf redis* yaconf* amqp* libsodium* mongodb* && \
+
+RUN apk update && apk add tzdata && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+	echo "Asia/Shanghai" > /etc/timezone && \
+	apk del tzdata && \
 	sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 
 ADD extension.tar /usr/local/etc/php/conf.d/
