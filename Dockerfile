@@ -1,6 +1,9 @@
 FROM php:7.1.33-fpm-alpine3.10
 
 RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-turbo-dev jpeg-dev freetype-dev make g++ rabbitmq-c-dev libsodium-dev libmcrypt-dev gmp-dev libmemcached-dev --no-cache && \
+	apk update && apk add tzdata && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+	echo "Asia/Shanghai" > /etc/timezone && \
+	apk del tzdata && \
 	composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ && \
 	docker-php-ext-configure gd --with-jpeg-dir=/usr/lib --with-freetype-dir=/usr/include/freetype2 && \
 	docker-php-ext-install pdo_mysql mysqli zip gd sockets gmp pcntl bcmath && \
@@ -29,10 +32,6 @@ RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-tur
 	tar -zxvf memcached-3.1.5.tgz && cd memcached-3.1.5 && \
 	phpize && ./configure && make && make install && \
 	cd / && rm -rf redis* yaconf* amqp* libsodium* mongodb* && \
-
-RUN apk update && apk add tzdata && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
-	echo "Asia/Shanghai" > /etc/timezone && \
-	apk del tzdata && \
 	sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 
 ADD extension.tar /usr/local/etc/php/conf.d/
