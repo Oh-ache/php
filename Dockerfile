@@ -6,7 +6,10 @@ RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-tur
 	apk del tzdata && \
 	composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ && \
 	docker-php-ext-configure gd --with-jpeg-dir=/usr/lib --with-freetype-dir=/usr/include/freetype2 && \
-	docker-php-ext-install pdo_mysql mysqli zip gd sockets gmp pcntl bcmath && \
+	docker-php-ext-install pdo_mysql mysqli zip gd sockets gmp pcntl bcmath
+RUN	cd / && wget https://github.com/swoole/sdebug/archive/sdebug_2_9.zip && \
+	unzip sdebug_2_9.zip && cd sdebug-sdebug_2_9 && \
+	phpize && ./configure --enable-xdebug && make && make install && \
 	cd / && wget http://pecl.php.net/get/redis-5.1.0.tgz && \
 	tar -zxf redis-5.1.0.tgz && cd redis-5.1.0 && \
 	phpize && ./configure && make && make install && \
@@ -31,7 +34,7 @@ RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-tur
 	cd / && wget http://pecl.php.net/get/memcached-3.1.5.tgz && \
 	tar -zxvf memcached-3.1.5.tgz && cd memcached-3.1.5 && \
 	phpize && ./configure && make && make install && \
-	cd / && rm -rf redis* yaconf* amqp* libsodium* mongodb* && \
+	cd / && rm -rf redis* yaconf* amqp* libsodium* mongodb* sdebug* && \
 	sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
 
 ADD extension.tar /usr/local/etc/php/conf.d/
