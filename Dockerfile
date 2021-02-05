@@ -1,6 +1,7 @@
 FROM php:7.1.33-fpm-alpine3.10
 
-RUN	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-turbo-dev jpeg-dev freetype-dev make g++ rabbitmq-c-dev libsodium-dev libmcrypt-dev gmp-dev libmemcached-dev --no-cache && \
+RUN	sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories && \
+	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-turbo-dev jpeg-dev freetype-dev make g++ rabbitmq-c-dev libsodium-dev libmcrypt-dev gmp-dev libmemcached-dev --no-cache && \
 	apk update && apk add tzdata && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
 	echo "Asia/Shanghai" > /etc/timezone && \
 	apk del tzdata && \
@@ -34,8 +35,7 @@ RUN	cd / && wget https://github.com/swoole/sdebug/archive/sdebug_2_9.zip && \
 	cd / && wget http://pecl.php.net/get/memcached-3.1.5.tgz && \
 	tar -zxvf memcached-3.1.5.tgz && cd memcached-3.1.5 && \
 	phpize && ./configure && make && make install && \
-	cd / && rm -rf redis* yaconf* amqp* libsodium* mongodb* sdebug* && \
-	sed -i 's/dl-cdn.alpinelinux.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apk/repositories
+	cd / && rm -rf redis* yaconf* amqp* libsodium* mongodb* sdebug*
 
 ADD extension.tar /usr/local/etc/php/conf.d/
 
