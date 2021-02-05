@@ -11,7 +11,7 @@ RUN	sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 	docker-php-ext-install pdo_mysql mysqli zip gd sockets gmp pcntl bcmath
 RUN	cd / && unzip sdebug_2_9.zip && cd sdebug-sdebug_2_9 && phpize && ./configure --enable-xdebug && make && make install && \
 	cd /redis-5.1.0 && phpize && ./configure && make && make install && \
-	cd /swoole-4.4.16 && phpize && ./configure --enable-openssl && make && make install && \
+	cd /swoole-4.6.2 && phpize && ./configure --enable-openssl && make && make install && \
 	cd /amqp-1.10.2 && phpize && ./configure && make && make install && \
 	cd /libsodium-2.0.22 && phpize && ./configure && make && make install && \
 	cd /mcrypt-1.0.3 && phpize && ./configure && make && make install && \
