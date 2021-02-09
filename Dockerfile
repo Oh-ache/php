@@ -3,6 +3,7 @@ FROM php:7.4.5-fpm-alpine
 ADD sdebug_2_9.zip /
 ADD extension.tar.gz /usr/local/etc/php/conf.d/
 ADD *.tgz  /
+Add swoftcli /usr/bin/swoftcli/
 
 RUN	sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories && \
 	apk add composer zip libzip-dev libpng-dev autoconf gcc libc-dev libjpeg-turbo-dev freetype-dev make g++ rabbitmq-c-dev libsodium-dev libmcrypt-dev unzip gmp-dev --no-cache && \
