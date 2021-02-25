@@ -1,4 +1,4 @@
-FROM php:7.4.5-fpm-alpine
+FROM php:7.4.5-cli-alpine
 
 ADD sdebug_2_9.zip /
 ADD extension.tar.gz /usr/local/etc/php/conf.d/
