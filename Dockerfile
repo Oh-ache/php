@@ -12,7 +12,7 @@ RUN	sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 	docker-php-ext-configure gd --with-jpeg-dir=/usr/lib --with-freetype-dir=/usr/include/freetype2 && \
 	docker-php-ext-install pdo_mysql mysqli zip gd sockets gmp pcntl bcmath
 RUN curl -sS https://getcomposer.org/installer | php && \
-	mv composer.phar /usr/bin/compsoer && \
+	mv /var/www/html/composer.phar /usr/bin/composer && \
 	composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/ && \
 	cd / && unzip sdebug_2_9.zip && cd sdebug-sdebug_2_9 && phpize && ./configure --enable-xdebug && make && make install && \
 	cd /redis-5.1.0 && phpize && ./configure && make && make install && \
