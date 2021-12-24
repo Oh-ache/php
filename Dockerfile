@@ -19,6 +19,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 	cd /libsodium-2.0.22 && phpize && ./configure && make && make install && \
 	cd /mcrypt-1.0.3 && phpize && ./configure && make && make install && \
 	cd /mongodb-1.7.4 && phpize && ./configure && make && make install && \
-	cd / && rm -rf sdebug* redis* swoole* amqp* libsodium* mongodb*
+	cd /xlswriter-1.5.1 && phpize && ./configure && make && make install && \
+	cd / && rm -rf sdebug* redis* swoole* amqp* libsodium* mongodb* xlswriter*
 
 EXPOSE 9000
