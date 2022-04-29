@@ -23,6 +23,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 	cd /mcrypt-1.0.3 && phpize && ./configure && make && make install && \
 	cd /mongodb-1.7.4 && phpize && ./configure && make && make install && \
 	cd /memcached-3.1.5 && phpize && ./configure && make && make install && \
+    cd /xlswriter-1.5.1 && phpize && ./configure && make && make install && \
 	cd / && rm -rf redis* amqp* libsodium* mongodb* sdebug*
 
 EXPOSE 9000
