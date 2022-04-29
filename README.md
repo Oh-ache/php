@@ -2,6 +2,11 @@
 	pdo_mysql
 	gd
 	zip
+    sdebug
+    mongodb
+    redis
+    swoole
+    xlswriter
 
 
 #### 文件目录
