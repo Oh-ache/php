@@ -1,17 +1,7 @@
 #### 安装扩展
 	pdo_mysql
-	gd
-	zip
-    sdebug
-    mongodb
-    redis
     swoole
-    xlswriter
 
 
-#### 文件目录
-	- /var/www/html	网站文件目录
-	- /usr/local/etc/php	php配置文件目录
-
-#### compsoer
-	采用阿里镜像
+#### 使用
+    用swoole启动laravel 避免多装nginx
